@@ -1,0 +1,9 @@
+.chart {
+    width: 300px;
+    height: 400px;
+
+    @media screen and (min-width: 768px) {
+        width: 500px;
+        height: 600px;
+    }
+}

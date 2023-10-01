@@ -1,7 +1,7 @@
 @keyframes size-out {
     0% {
         width: 100%;
-        min-height: 60vh;
+        min-height: 40vh;
     }
     100% {
         width: 100%;
@@ -40,7 +40,7 @@
     margin: 1rem;
 
     width: 100%;
-    min-height: 60vh;
+    min-height: 40vh;
 
     img {
         animation: fade-in .5s ease-out 1s forwards;

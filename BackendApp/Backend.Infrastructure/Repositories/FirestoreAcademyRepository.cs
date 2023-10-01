@@ -26,6 +26,7 @@ public class FirestoreAcademyRepository : FirestoreBaseRepository, IAcademyRepos
         {
             var dictionary = JsonConvert.SerializeObject(snapshot.ToDictionary());
             var r = JsonConvert.DeserializeObject<Academy>(dictionary);
+            if (r is null) continue;
 
             result.Add(r);
         }

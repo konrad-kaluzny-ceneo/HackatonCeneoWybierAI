@@ -7,9 +7,9 @@ namespace Backend.Infrastructure.Repositories
     {
         private Dictionary<int, Results> resultsStore = new Dictionary<int, Results>();
 
-        public Results GetResults(int sessionId)
+        public Results? GetResults(int sessionId)
         {
-            return resultsStore.TryGetValue(sessionId, out var result) ? result : new Results();
+            return resultsStore.TryGetValue(sessionId, out var result) ? result : null;
         }
 
         public int SaveResults(Results results)

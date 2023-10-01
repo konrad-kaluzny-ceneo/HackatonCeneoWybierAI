@@ -1,7 +1,6 @@
-﻿namespace Backend.Controllers
+﻿namespace Backend.Model.QuizInput;
+
+public class QuestionnaireAnswers
 {
-    public class QuestionnaireAnswers
-    {
-        public List<QuestionnaireAnswer> Answers { get; set; }
-    }
+    public List<QuestionnaireAnswer> Answers { get; set; }
 }

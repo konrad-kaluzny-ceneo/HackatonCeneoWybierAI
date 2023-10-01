@@ -1,0 +1,66 @@
+<div class="questionnaire-container p-3">
+  
+  <div *ngIf="isLoading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <p class="text-base text-center mt-2" style="color: white;">Sztuczna inteligencja właśnie oblicza dla Ciebie najlepsze dopasowanie. Jesteś bliżej niż myślisz.</p>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <div class="summary flex flex-wrap justify-center gap-4">
+
+      <div>
+        <div class="logo-container flex flex-row justify-center items-center">
+            <img width="300" class="py-5" src="/assets/logo.png" alt="">
+        </div>
+
+        <div class="card mb-3">
+          <app-results-chart [results]="result.fieldOfStudyProposals"></app-results-chart>
+        </div>
+
+      </div>
+
+      <div>
+
+        <div class="card mb-3">
+          <div class="text-lg mb-6">Krótkie podsumowanie od sztucznej inteligencji 🥳🎉</div>
+          <div class="image">
+            <img width="400" src="/assets/final.png" alt="">
+          </div>
+          <div class="text-base">
+            {{result.expertDescription}}
+          </div>
+        </div>
+
+  
+        <div class="card mb-3">
+          <div class="text-lg mb-4">Propozycje kierunków studiów</div>
+          <div class="text-base">
+            <div *ngFor="let proposal of result.fieldOfStudyProposals" class="mb-8">
+              <div class="flex flex-row text-left mb-2">
+                <div class="font-bold">{{proposal.name}}</div>
+                <div *ngIf="proposal.percentageMatch != null && proposal.percentageMatch > 0">
+                  <div class="pl-1 font-bold"> - {{proposal.percentageMatch}}%</div>
+                </div>
+              </div>
+              <div *ngFor="let institution of proposal.managingInstitutions">
+                <div class="flex flex-row text-left">
+                  <div>{{institution}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+  
+    </div>
+
+    <div class="accent flex flex-col items-center">
+      <div class="color-contrast text-center text-base mt-3">Wyniki są niezadowalające? Spróbuj ponownie.</div>
+      <button mat-fab color="primary" class="m-2" routerLink="/questionnaire">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+
+</div>

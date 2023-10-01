@@ -18,7 +18,7 @@ namespace Backend.Controllers
         [HttpGet("GetResults/{sessionId}")]
         public ActionResult<Model.Results> GetResults(int sessionId)
         {
-            return resultsRepository.GetResults(sessionId);
+            return resultsRepository.GetResults(sessionId) ?? new Model.Results();
         }
     }
 }

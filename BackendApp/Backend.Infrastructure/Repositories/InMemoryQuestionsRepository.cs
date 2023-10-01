@@ -1,7 +1,7 @@
-﻿using Backend.Controllers;
-using Backend.Infrastructure.Services;
+﻿using Backend.Infrastructure.Services;
 using Backend.Model;
 using Backend.Model.Interfaces;
+using Backend.Model.QuizInput;
 using Backend.Model.QuizOutput;
 
 namespace Backend.Infrastructure.Repositories
@@ -15,6 +15,14 @@ namespace Backend.Infrastructure.Repositories
         public InMemoryQuestionsRepository(IQuestionsProvider questionsProvider)
         {
             _questions = questionsProvider.GetQuestions().ToList();
+        }
+
+        public int Add(Question question)
+        {
+            var id = _questions.Max(x => x.Id) + 1;
+            question.Id = id;
+            _questions.Add(question);
+            return id;
         }
 
         public Task<List<QuestionWithAnswer>> GetQuestionsWithAnswers(QuestionnaireAnswers questionnaire)

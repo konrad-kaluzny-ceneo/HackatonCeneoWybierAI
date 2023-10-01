@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Backend.Model;
 using Backend.Model.Interfaces;
-using Backend.OpenAI.QuestionProviderStructures;
 
 namespace Backend.Infrastructure.Repositories
 {

@@ -1,38 +1,38 @@
 ﻿using Backend.Model;
 using Backend.Model.Interfaces;
+using Backend.Model.QuizOutput;
 using Backend.OpenAI;
-using Backend.OpenAI.QuestionProviderStructures;
+using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class QuestionsGeneratorController : Controller
     {
-        private OpenAIQuestionProvider _questionsProvider;
-        private IQuestionHistoryRepository _questionHistoryRepository;
+        private readonly IQuestionaireGenerator _questionaireGenerator;
+        private readonly IResultsService _resultsService;
 
         public QuestionsGeneratorController(
-            OpenAIQuestionProvider questionProvider,
-            IQuestionHistoryRepository questionHistoryRepository
-            )
+            IQuestionaireGenerator questionaireGenerator,
+            IResultsService resultsService)
         {
-            _questionsProvider = questionProvider;
-            _questionHistoryRepository = questionHistoryRepository;
+            _questionaireGenerator = questionaireGenerator;
+            _resultsService = resultsService;
         }
 
         [HttpGet("NextQuestion")]
-        public async Task<ActionResult<QuestionAndAnswer>> NextQuestionAsync(int sessionid, string answerFromUser = "")
+        public async Task<ActionResult<Question>> NextQuestionAsync(int sessionid, string answerFromUser = "")
         {
-            _questionHistoryRepository.FillUpLastElementInHistory(sessionid, answerFromUser);
+            return await _questionaireGenerator.GetNextQuestion(sessionid, answerFromUser);
+        }
 
-            var nextQuestion = await _questionsProvider.GetNextQuestion(
-                _questionHistoryRepository.GetHistory(sessionid),
-                answerFromUser
-            );
-
-            _questionHistoryRepository.AddElementToHistory(sessionid, nextQuestion);
-
-            return nextQuestion;
+        [HttpGet("GetQuizResults/{sessionId}")]
+        public ActionResult<Model.Results> GenerateResults(int sessionId)
+        {
+            var r = _resultsService.GetResults(sessionId);
+            return Ok(r);
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace Backend.Model
+﻿namespace Backend.Model;
+
+public class QuestionWithAnswer
 {
-    public class QuestionWithAnswer
-    {
-        public string Question { get; set; }
-        public string Answer { get; set; }
-    }
+    public string Question { get; set; }
+    public string Answer { get; set; }
 }

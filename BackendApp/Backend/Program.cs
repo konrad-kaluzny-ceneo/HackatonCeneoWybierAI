@@ -21,11 +21,13 @@ builder.Services.AddSingleton<IResultsRepository, InMemoryResutlsRepository>();
 builder.Services.AddSingleton<IQuestionsProvider, QuestionProvider>();
 builder.Services.AddSingleton<IQuestionsRepository, InMemoryQuestionsRepository>();
 builder.Services.AddTransient<IFieldsOfStudiesService, FieldsOfStudiesService>();
+builder.Services.AddTransient<IQuestionaireGenerator, QuestionaireGenerator>();
 builder.Services.AddSingleton<OpenAIQuestionProvider>();
 builder.Services.AddSingleton<IQuestionHistoryRepository, InMemoryQuestionHistoryRepository>();
+builder.Services.AddTransient<IResultsService, ResultsService>();
 builder.Services.AddOpenAISearchParams(opt =>
 {
-    opt.ApiKey = builder.Configuration["OpenAIApiKey"];
+    opt.ApiKey = builder.Configuration["OpenAIApiKey"] ?? string.Empty;
 });
 
 builder.Services.AddApplicationInsightsTelemetry();
