@@ -1,0 +1,14 @@
+<div class="p-3 ">
+    <div class="card text-xl">
+        {{question.value}}
+    </div>
+
+    <div class="actions p-3 flex justify-center">
+        <button mat-fab color="primary" class="m-2" (click)="answerClick(false)">
+            <mat-icon>close</mat-icon>
+        </button>
+        <button mat-fab color="accent" class="m-2" (click)="answerClick(true)">
+            <mat-icon>check</mat-icon>
+        </button>
+    </div>
+</div>

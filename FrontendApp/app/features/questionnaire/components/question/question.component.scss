@@ -1,0 +1,18 @@
+::ng-deep button {
+    height: initial!important;
+    max-height: 5rem;
+    padding: 1rem 1rem!important;
+}
+
+.buttons-container {
+    flex-wrap: wrap;
+    flex-direction: column;
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+        button {
+            width: calc(50% - 1rem);
+            margin: .5rem;
+            padding: 2rem!important;
+        }
+    }
+}

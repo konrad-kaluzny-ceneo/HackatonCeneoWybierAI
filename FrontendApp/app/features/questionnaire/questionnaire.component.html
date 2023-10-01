@@ -1,0 +1,18 @@
+<div class="questionnaire-container">
+    <div class="w-full h-full flex justify-center items-center" *ngIf="loading">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+    
+    <div *ngIf="!loading" class="parent">
+        <ng-container *ngFor="let question of questionnaire?.questions; let i = index">
+          <div class="child" *ngIf="i === currentQuestionIndex" [@slideIn]>
+            <app-question
+              *ngIf="i === currentQuestionIndex"
+              [question]="question"
+              (answered)="nextQuestion(i, $event)">
+            </app-question>
+          </div>
+        </ng-container>
+    </div>
+</div>
+
